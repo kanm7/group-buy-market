@@ -86,7 +86,7 @@ LOCK TABLES `group_buy_discount` WRITE;
 
 INSERT INTO `group_buy_discount` (`id`, `discount_id`, `discount_name`, `discount_desc`, `discount_type`, `market_plan`, `market_expr`, `tag_id`, `create_time`, `update_time`)
 VALUES
-	(1,9890001,'测试优惠','测试优惠',0,'ZJ','20',NULL,'2024-12-07 10:20:15','2024-12-07 10:20:15');
+	(1,25120207,'测试优惠','测试优惠',0,'ZJ','20',NULL,'2024-12-07 10:20:15','2024-12-07 10:20:15');
 
 /*!40000 ALTER TABLE `group_buy_discount` ENABLE KEYS */;
 UNLOCK TABLES;
