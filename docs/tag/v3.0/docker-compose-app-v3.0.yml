@@ -26,8 +26,8 @@ services:
     environment:
       - TZ=PRC
       - SERVER_PORT=8080
-      - APP_CONFIG_GROUP_BUY_MARKET_API_URL=http://host.docker.internal
-      - APP_CONFIG_GROUP_BUY_MARKET_NOTIFY_URL=http://host.docker.internal/api/v1/alipay/group_buy_notify
+      - APP_CONFIG_GROUP_BUY_MARKET_API_URL=http://117.72.169.159
+      - APP_CONFIG_GROUP_BUY_MARKET_NOTIFY_URL=http://117.72.169.159/api/v1/alipay/group_buy_notify
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/s-pay-mall-ddd-market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai

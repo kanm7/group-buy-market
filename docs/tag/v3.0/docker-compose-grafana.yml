@@ -28,10 +28,10 @@ services:
       - ./grafana:/etc/grafana
     environment:
       - GF_DATABASE_TYPE=mysql
-      - GF_DATABASE_HOST=host.docker.internal:3306
+      - GF_DATABASE_HOST=mysql:3306
       - GF_DATABASE_NAME=grafana
       - GF_DATABASE_USER=root
-      - GF_DATABASE_PASSWORD=12345678
+      - GF_DATABASE_PASSWORD=123456
     networks:
       - my-network
 
