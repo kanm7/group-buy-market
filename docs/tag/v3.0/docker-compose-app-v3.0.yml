@@ -1,5 +1,8 @@
 version: '3.8'
 # docker-compose -f docker-compose-app-v1.0.yml up -d
+# 注意1，更换 117.72.169.159 为你的云服务器 IP
+# 注意2，如果你 s-pay-mall-app 不是和nginx 部署一台机器，那么要把 host.docker.internal 修改为对应的 ip 地址。
+# 注意3，如果你有域名，那么 ALIPAY_NOTIFY_URL 的地址，可以更换为实际的域名地址，并注意在支付宝里，配置真实域名地址。
 services:
   # 部署前端项目
   nginx:
@@ -23,14 +26,14 @@ services:
     environment:
       - TZ=PRC
       - SERVER_PORT=8080
-      - APP_CONFIG_GROUP_BUY_MARKET_API_URL=http://117.72.169.159
-      - APP_CONFIG_GROUP_BUY_MARKET_NOTIFY_URL=http://117.72.169.159/api/v1/alipay/group_buy_notify
+      - APP_CONFIG_GROUP_BUY_MARKET_API_URL=http://host.docker.internal
+      - APP_CONFIG_GROUP_BUY_MARKET_NOTIFY_URL=http://host.docker.internal/api/v1/alipay/group_buy_notify
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/s-pay-mall-ddd-market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
-      - SPRING_RABBITMQ_ADDRESSES=117.72.169.159
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
       - SPRING_RABBITMQ_PORT=5672
       - SPRING_RABBITMQ_USERNAME=admin
       - SPRING_RABBITMQ_PASSWORD=admin
@@ -67,7 +70,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/group_buy_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
-      - SPRING_RABBITMQ_ADDRESSES=117.72.169.159
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
       - SPRING_RABBITMQ_PORT=5672
       - SPRING_RABBITMQ_USERNAME=admin
       - SPRING_RABBITMQ_PASSWORD=admin
@@ -101,7 +104,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/group_buy_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
-      - SPRING_RABBITMQ_ADDRESSES=117.72.169.159
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
       - SPRING_RABBITMQ_PORT=5672
       - SPRING_RABBITMQ_USERNAME=admin
       - SPRING_RABBITMQ_PASSWORD=admin
