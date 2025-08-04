@@ -16,7 +16,7 @@ services:
 
   # 监控界面；
   # 数据库配置说明，本地docker，链接非docker内的本地mysql，可以配置 host.docker.internal 或者本地IP地址。
-  grafana:
+  gr:
     image: grafana/grafana:10.2.0
     container_name: grafana
     restart: always
