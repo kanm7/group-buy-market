@@ -1,5 +1,8 @@
 version: '3.8'
 # docker-compose -f docker-compose-app-v1.0.yml up -d
+# 注意1，更换 117.72.169.159 为你的云服务器 IP
+# 注意2，如果你 s-pay-mall-app 不是和nginx 部署一台机器，那么要把 host.docker.internal 修改为对应的 ip 地址。
+# 注意3，如果你有域名，那么 ALIPAY_NOTIFY_URL 的地址，可以更换为实际的域名地址，并注意在支付宝里，配置真实域名地址。
 services:
   # 部署前端项目
   nginx:
@@ -30,6 +33,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/s-pay-mall-ddd-market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=admin
       - WEIXIN_CONFIG_ORIGINALID=gh_e067c267e056
       - WEIXIN_CONFIG_TOKEN=b8b6
       - WEIXIN_CONFIG_APP_ID=wx5a228ff69e28a91f
@@ -51,7 +58,7 @@ services:
   # 代理镜像（小傅哥打包好的，可以直接使用）； registry.cn-hangzhou.aliyuncs.com/xfg-studio/group-buy-market-app:3.0
   group-buy-market-01:
     image: fuzhengwei/group-buy-market-app:3.0
-    container_name: group-buy-market-app-03
+    container_name: group-buy-market-app-01
     restart: on-failure
     ports:
       - "8091:8091"
@@ -63,6 +70,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/group_buy_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=admin
       - REDIS_SDK_CONFIG_HOST=redis
       - REDIS_SDK_CONFIG_PORT=6379
       - XFG_WRENCH_CONFIG_SYSTEM=group-buy-market
@@ -81,7 +92,7 @@ services:
   # # 拼团，负载02
   group-buy-market-02:
     image: fuzhengwei/group-buy-market-app:3.0
-    container_name: group-buy-market-app-03
+    container_name: group-buy-market-app-02
     restart: on-failure
     ports:
       - "8092:8091"
@@ -93,6 +104,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/group_buy_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
+      - SPRING_RABBITMQ_ADDRESSES=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=admin
+      - SPRING_RABBITMQ_PASSWORD=admin
       - REDIS_SDK_CONFIG_HOST=redis
       - REDIS_SDK_CONFIG_PORT=6379
       - XFG_WRENCH_CONFIG_SYSTEM=group-buy-market

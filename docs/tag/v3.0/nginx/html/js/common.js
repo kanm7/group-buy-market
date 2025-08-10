@@ -1,8 +1,8 @@
 // 公共配置和工具函数
 const AppConfig = {
     // 基础地址配置
-    sPayMallUrl: "http://127.0.0.1:8070",
-    groupBuyMarketUrl: "http://127.0.0.1:8091",
+    sPayMallUrl: "http://117.72.169.159",
+    groupBuyMarketUrl: "http://117.72.169.159",
     goodsId: "9890001"
 };
 
