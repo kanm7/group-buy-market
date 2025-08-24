@@ -101,11 +101,6 @@ public class TradeRepository implements ITradeRepository {
         if (StringUtils.isBlank(teamId)) {
             // 使用 RandomStringUtils.randomNumeric 替代公司里使用的雪花算法UUID
             teamId = RandomStringUtils.randomNumeric(8);
-            // 日期处理
-            Date currentDate = new Date();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(currentDate);
-            calendar.add(Calendar.MINUTE, payActivityEntity.getValidTime());
 
             // 构建拼团订单
             GroupBuyOrder groupBuyOrder = GroupBuyOrder.builder()
@@ -119,8 +114,8 @@ public class TradeRepository implements ITradeRepository {
                     .targetCount(payActivityEntity.getTargetCount())
                     .completeCount(0)
                     .lockCount(1)
-                    .validStartTime(currentDate)
-                    .validEndTime(calendar.getTime())
+                    .validStartTime(payActivityEntity.getStartTime())
+                    .validEndTime(payActivityEntity.getEndTime())
                     .notifyType(notifyConfigVO.getNotifyType().getCode())
                     .notifyUrl(notifyConfigVO.getNotifyUrl())
                     .build();
@@ -135,6 +130,12 @@ public class TradeRepository implements ITradeRepository {
             }
         }
 
+        // 日期处理
+        Date currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.MINUTE, payActivityEntity.getValidTime());
+
         // 使用 RandomStringUtils.randomNumeric 替代公司里使用的雪花算法UUID
         String orderId = RandomStringUtils.randomNumeric(12);
         GroupBuyOrderList groupBuyOrderListReq = GroupBuyOrderList.builder()
@@ -142,8 +143,8 @@ public class TradeRepository implements ITradeRepository {
                 .teamId(teamId)
                 .orderId(orderId)
                 .activityId(payActivityEntity.getActivityId())
-                .startTime(payActivityEntity.getStartTime())
-                .endTime(payActivityEntity.getEndTime())
+                .startTime(currentDate)
+                .endTime(calendar.getTime())
                 .goodsId(payDiscountEntity.getGoodsId())
                 .source(payDiscountEntity.getSource())
                 .channel(payDiscountEntity.getChannel())
@@ -387,6 +388,8 @@ public class TradeRepository implements ITradeRepository {
         long occupy = redisService.incr(teamStockKey) + 1;
 
         if (occupy > target + recoveryCount) {
+            // 超出库存限制时，需要将已经增加的库存减回去，避免库存泄漏
+            redisService.decr(teamStockKey);
             return false;
         }
 

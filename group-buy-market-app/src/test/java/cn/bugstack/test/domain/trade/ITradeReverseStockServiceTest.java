@@ -58,7 +58,7 @@ public class ITradeReverseStockServiceTest {
         String teamId = null;
         for (int i = 1; i < 4; i++) {
             LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-            lockMarketPayOrderRequestDTO.setUserId("xfg80" + i);
+            lockMarketPayOrderRequestDTO.setUserId("xfg110" + i);
             lockMarketPayOrderRequestDTO.setTeamId(teamId);
             lockMarketPayOrderRequestDTO.setActivityId(100123L);
             lockMarketPayOrderRequestDTO.setGoodsId("9890001");
