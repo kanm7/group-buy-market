@@ -259,6 +259,10 @@ public class TradeRepository implements ITradeRepository {
         }
 
         // 3. 更新拼团完成状态
+        // 【面试题，这个地方可能会有一个并发情况，就是多个用户拿到的 groupBuyTeamEntity.getCompleteCount() 是同一个值怎么办？】
+        // 【方式1；可以给调用 settlementMarketPayOrder 结算方法的地方，添加一个分布式锁，让结算只能顺序执行】
+        // 【方式2；这部分结算，只做数据库的更新操作，以及发送mq，之后在消费mq的地方，做结算。】
+        // 【方式3；增加一个定时job任务补偿，检索订单量够，但没有结算的拼团组队记录】
         if (groupBuyTeamEntity.getTargetCount() - groupBuyTeamEntity.getCompleteCount() == 1) {
             int updateOrderStatusCount = groupBuyOrderDao.updateOrderStatus2COMPLETE(groupBuyTeamEntity.getTeamId());
             if (1 != updateOrderStatusCount) {
