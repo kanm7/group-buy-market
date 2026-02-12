@@ -59,7 +59,7 @@ public class TradePort implements ITradePort {
             return NotifyTaskHTTPEnumVO.NULL.getCode();
         } catch (Exception e) {
             Thread.currentThread().interrupt();
-            return NotifyTaskHTTPEnumVO.NULL.getCode();
+            return NotifyTaskHTTPEnumVO.ERROR.getCode();
         }
     }
 
