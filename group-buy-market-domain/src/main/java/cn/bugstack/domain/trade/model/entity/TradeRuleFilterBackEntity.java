@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
- * @description 拼团交易，过滤反馈实体
+ * @description 只需要知道用户购买的订单量就行
  * @create 2025-01-25 14:16
  */
 @Data

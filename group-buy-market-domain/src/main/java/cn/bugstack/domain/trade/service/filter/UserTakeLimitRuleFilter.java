@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
- * @description 用户参与限制，规则过滤
+ * @description 用户参与次数限制过滤器
  * @create 2025-01-25 09:19
  */
 @Slf4j
@@ -24,6 +24,16 @@ public class UserTakeLimitRuleFilter implements ILogicHandler<TradeRuleCommandEn
 
     @Resource
     private ITradeRepository repository;
+
+    /**
+     * - ✅ 查询用户已参与的订单数量
+     * - ✅ 判断是否达到活动规定的参与上限
+     * - ✅ 返回用户参与次数，用于后续构建唯一索引
+     * @param requestParameter
+     * @param dynamicContext
+     * @return
+     * @throws Exception
+     */
 
     @Override
     public TradeRuleFilterBackEntity apply(TradeRuleCommandEntity requestParameter, TradeRuleFilterFactory.DynamicContext dynamicContext) throws Exception {

@@ -34,12 +34,14 @@ public class LinkedList<E> implements ILink<E> {
     }
 
     void linkLast(E e) {
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, e, null);
-        last = newNode;
+        final Node<E> l = last;  // 保存当前的尾节点
+        final Node<E> newNode = new Node<>(l, e, null); // ↓↓↓ 创建新节点，同时设置 prev 和 next ↓↓↓
+        last = newNode; // 更新尾节点为新节点
         if (l == null) {
+            // 如果原来链表为空，新节点也是头节点
             first = newNode;
         } else {
+            // 否则，旧尾节点的 next 指向新节点
             l.next = newNode;
         }
         size++;
@@ -107,18 +109,22 @@ public class LinkedList<E> implements ILink<E> {
         return element;
     }
 
+    // 获取指定索引的元素
     @Override
     public E get(int index) {
         return node(index).item;
     }
 
     Node<E> node(int index) {
+        // 判断索引在前半部分还是后半部分
         if (index < (size >> 1)) {
+            // 前半部分：从头节点开始向后找
             Node<E> x = first;
             for (int i = 0; i < index; i++)
                 x = x.next;
             return x;
         } else {
+            // 后半部分：从尾节点开始向前找
             Node<E> x = last;
             for (int i = size - 1; i > index; i--)
                 x = x.prev;

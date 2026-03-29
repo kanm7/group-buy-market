@@ -2,7 +2,7 @@ package cn.bugstack.types.design.framework.link.model2.chain;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
- * @description 链接口
+ * @description 链表接口
  * @create 2025-01-18 09:27
  */
 public interface ILink<E> {

@@ -27,6 +27,18 @@ public class ActivityUsabilityRuleFilter implements ILogicHandler<TradeRuleComma
     @Resource
     private ITradeRepository repository;
 
+
+    /**
+     * - ✅ 校验活动状态是否为"生效"
+     * - ✅ 校验当前时间是否在活动有效期内
+     * - ✅ 将活动信息写入上下文，供下一个节点使用
+     * - ✅ 通过后自动流转到下一个过滤器
+     * @param requestParameter
+     * @param dynamicContext
+     * @return
+     * @throws Exception
+     */
+
     @Override
     public TradeRuleFilterBackEntity apply(TradeRuleCommandEntity requestParameter, TradeRuleFilterFactory.DynamicContext dynamicContext) throws Exception {
         log.info("交易规则过滤-活动的可用性校验{} activityId:{}", requestParameter.getUserId(), requestParameter.getActivityId());

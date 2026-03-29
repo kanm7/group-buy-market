@@ -12,7 +12,8 @@ public class LinkArmory<T, D, R> {
 
     private final BusinessLinkedList<T, D, R> logicLink;
 
-    @SafeVarargs
+    
+    @SafeVarargs // 这个注解用来消除泛型数组创建时的编译器警告。
     public LinkArmory(String linkName, ILogicHandler<T, D, R>... logicHandlers) {
         logicLink = new BusinessLinkedList<>(linkName);
         for (ILogicHandler<T, D, R> logicHandler: logicHandlers){

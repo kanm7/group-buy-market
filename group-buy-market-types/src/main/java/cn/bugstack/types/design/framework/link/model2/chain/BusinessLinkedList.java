@@ -4,7 +4,7 @@ import cn.bugstack.types.design.framework.link.model2.handler.ILogicHandler;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
- * @description 业务链路
+ * @description 用于执行业务
  * @create 2025-01-18 10:27
  */
 public class BusinessLinkedList<T, D, R> extends LinkedList<ILogicHandler<T, D, R>> implements ILogicHandler<T, D, R>{

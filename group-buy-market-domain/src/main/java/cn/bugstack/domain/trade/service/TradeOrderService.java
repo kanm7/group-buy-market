@@ -23,6 +23,8 @@ public class TradeOrderService implements ITradeOrderService {
 
     @Resource
     private ITradeRepository repository;
+
+    // 【2-11新增】注入责任链 - 用于交易规则过滤
     @Resource
     private BusinessLinkedList<TradeRuleCommandEntity, TradeRuleFilterFactory.DynamicContext, TradeRuleFilterBackEntity> tradeRuleFilter;
 
@@ -37,6 +39,18 @@ public class TradeOrderService implements ITradeOrderService {
         log.info("拼团交易-查询拼单进度:{}", teamId);
         return repository.queryGroupBuyProgress(teamId);
     }
+
+
+    /**
+     * - ✅ 在执行锁单前，先通过责任链进行规则校验
+     * - ✅ 任何一项规则不通过都会抛出异常，阻断后续流程
+     * - ✅ 规则全部通过后，获取用户参与次数用于防止重复下单
+     * @param userEntity        用户根实体对象
+     * @param payActivityEntity 拼团，支付活动实体对象
+     * @param payDiscountEntity 拼团，支付优惠实体对象
+     * @return
+     * @throws Exception
+     */
 
     @Override
     public MarketPayOrderEntity lockMarketPayOrder(UserEntity userEntity, PayActivityEntity payActivityEntity, PayDiscountEntity payDiscountEntity) throws Exception {
