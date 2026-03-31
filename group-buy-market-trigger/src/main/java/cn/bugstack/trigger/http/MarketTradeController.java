@@ -42,7 +42,7 @@ public class MarketTradeController implements IMarketTradeService {
     private ITradeLockOrderService tradeOrderService;
 
     /**
-     * 拼团营销锁单
+     * 用户下单时，先在拼团系统里锁住一份优惠资格，再去走后面的支付流程。
      */
     @RequestMapping(value = "lock_market_pay_order", method = RequestMethod.POST)
     @Override

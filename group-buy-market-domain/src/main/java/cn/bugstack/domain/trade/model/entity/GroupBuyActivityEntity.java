@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
- * @description 拼团活动实体对象
+ * @description 表示一个拼团战队的完整信息，包含目标人数、已完成人数、锁单人数等。
  * @create 2025-01-25 12:23
  */
 @Data
