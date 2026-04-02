@@ -11,6 +11,12 @@ import cn.bugstack.api.response.Response;
  */
 public interface IMarketTradeService {
 
+
+    /**
+     * 营销锁单
+     * @param lockMarketPayOrderRequestDTO
+     * @return
+     */
     Response<LockMarketPayOrderResponseDTO> lockMarketPayOrder(LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO);
 
 }

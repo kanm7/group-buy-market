@@ -37,6 +37,13 @@ public class DefaultActivityStrategyFactory {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class DynamicContext {
+
+        /**
+         * 静态内部类的特点：
+         * ✅ 可以直接通过外部类访问：ExternalClass.StaticInnerClass
+         * ✅ 不依赖外部类的实例
+         * ✅ 可以独立创建对象
+         */
         // 拼团活动营销配置值对象
         private GroupBuyActivityDiscountVO groupBuyActivityDiscountVO;
         // 商品信息
