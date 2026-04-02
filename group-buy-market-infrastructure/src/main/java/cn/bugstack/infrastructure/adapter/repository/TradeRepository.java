@@ -188,6 +188,11 @@ public class TradeRepository implements ITradeRepository {
                 .build();
     }
 
+    /**
+     * 方法必须在 500 秒内执行完成
+     * 超过 500 秒 → 自动抛出异常 → 事务回滚
+     * @param groupBuyTeamSettlementAggregate
+     */
     @Transactional(timeout = 500)
     @Override
     public void settlementMarketPayOrder(GroupBuyTeamSettlementAggregate groupBuyTeamSettlementAggregate) {
